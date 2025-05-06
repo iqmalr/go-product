@@ -1,0 +1,92 @@
+# Binaries untuk program
+/bin/
+/out/
+
+# Direktori hasil build
+/dist/
+
+# File binary executable
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# File test binary
+*.test
+
+# Output dari go coverage tool
+*.out
+
+# Direktori dependency (jika menggunakan Go Modules)
+/vendor/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# File development environment
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# File log
+*.log
+
+# Profiling output
+*.pprof
+*.prof
+
+# Output dari Go tools
+/go.sum
+
+# Direktori cache Go
+/.go/
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# Air (hot reload) working directory
+/tmp/
+
+# File debug
+debug
+
+# File output dari IDE
+*.iml
+*.ipr
+*.iws
+
+# File output dari build tools
+/build/
+
+# File dokumentasi
+/doc/
+
+# File cgo
+_cgo_defun.c
+_cgo_gotypes.go
+_cgo_export.*
+
+# Test binary
+**/__debug_bin
+
+# Binary output nama project
+/<nama-project-binary>  # Ganti dengan nama binary project Anda
+
+# File coverage
+coverage.txt
+coverage.html
+
+# File hasil generate
+*.generated.go
+
+# File hasil mock
+*mock*.go
+
+# File hasil protobuf
+*.pb.go

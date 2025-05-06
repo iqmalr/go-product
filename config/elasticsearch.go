@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"os"
 	"strings"
 	"time"
 
@@ -14,10 +15,9 @@ var ES *elasticsearch.Client
 
 func ConnectElasticsearch() {
 	cfg := elasticsearch.Config{
-		Addresses: []string{
-			"http://localhost:9200",
-		}, Username: "elastic",
-		Password: "changeme",
+		Addresses: []string{"http://elasticsearch:9200"},
+		Username:  os.Getenv("ES_USERNAME"),
+		Password:  os.Getenv("ES_PASSWORD"),
 	}
 
 	client, err := elasticsearch.NewClient(cfg)
