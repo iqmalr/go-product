@@ -16,7 +16,8 @@ func ConnectElasticsearch() {
 	cfg := elasticsearch.Config{
 		Addresses: []string{
 			"http://localhost:9200",
-		},
+		}, Username: "elastic",
+		Password: "changeme",
 	}
 
 	client, err := elasticsearch.NewClient(cfg)
@@ -69,7 +70,7 @@ func createProductIndex() {
 		if res.IsError() {
 			log.Fatalf("Error creating index: %s", res.String())
 		}
-		
+
 		fmt.Println("Products index created successfully")
 	}
 }
