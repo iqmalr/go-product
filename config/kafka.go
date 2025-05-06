@@ -19,10 +19,8 @@ var (
 )
 
 func ConnectKafka() {
-	// Use localhost:29092 which is the PLAINTEXT_HOST listener
 	bootstrapServers := "localhost:29092"
 
-	// Producer configuration
 	producerConfig := kafka.ConfigMap{
 		"bootstrap.servers":       bootstrapServers,
 		"client.id":               "go-product-api",
@@ -34,7 +32,6 @@ func ConnectKafka() {
 		log.Fatalf("Failed to create Kafka producer: %s", err)
 	}
 
-	// Consumer configuration
 	consumerConfig := kafka.ConfigMap{
 		"bootstrap.servers":  bootstrapServers,
 		"group.id":           "go-product-group",
@@ -54,7 +51,6 @@ func ConnectKafka() {
 
 	fmt.Println("Kafka connection established")
 
-	// Start a goroutine to handle delivery reports
 	go func() {
 		for e := range producer.Events() {
 			switch ev := e.(type) {
@@ -68,12 +64,10 @@ func ConnectKafka() {
 		}
 	}()
 
-	// Try to create the topic
 	ensureTopicExists()
 }
 
 func ensureTopicExists() {
-	// Create admin client
 	adminClient, err := kafka.NewAdminClient(&kafka.ConfigMap{
 		"bootstrap.servers": "localhost:29092",
 	})
@@ -83,11 +77,9 @@ func ensureTopicExists() {
 	}
 	defer adminClient.Close()
 
-	// Create context with timeout
 	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 	defer cancel()
 
-	// Create the topic
 	topics := []kafka.TopicSpecification{
 		{
 			Topic:             ProductTopic,
@@ -96,14 +88,12 @@ func ensureTopicExists() {
 		},
 	}
 
-	// Try to create topic
 	results, err := adminClient.CreateTopics(ctx, topics)
 	if err != nil {
 		log.Printf("Failed to create topics: %v\n", err)
 		return
 	}
 
-	// Check results
 	for _, result := range results {
 		if result.Error.Code() != kafka.ErrNoError &&
 			result.Error.Code() != kafka.ErrTopicAlreadyExists {
@@ -113,7 +103,6 @@ func ensureTopicExists() {
 		}
 	}
 
-	// Test topic metadata retrieval to confirm connection
 	metadata, err := adminClient.GetMetadata(nil, true, 10000)
 	if err != nil {
 		log.Printf("Failed to get metadata: %v\n", err)
@@ -128,7 +117,7 @@ func ensureTopicExists() {
 
 func CloseKafkaConnections() {
 	if KafkaProducer != nil {
-		KafkaProducer.Flush(15 * 1000) // Wait up to 15 seconds for messages to be delivered
+		KafkaProducer.Flush(15 * 1000)
 		KafkaProducer.Close()
 	}
 	if KafkaConsumer != nil {
