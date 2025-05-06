@@ -53,6 +53,7 @@ Thumbs.db
 # Air (hot reload) working directory
 /tmp/
 tmp/
+# tmp/
 
 # File debug
 debug
