@@ -7,7 +7,7 @@ services:
     environment:
       POSTGRES_USER: devuser
       POSTGRES_PASSWORD: devpass
-      POSTGRES_DB: mydb
+      POSTGRES_DB: go_products
     ports:
       - "5433:5432"
     volumes:
@@ -49,9 +49,10 @@ services:
     environment:
       # - discovery.type=single-node
       - ES_JAVA_OPTS=-Xms1g -Xmx1g
-      - ELASTIC_PASSWORD=changeme
       - xpack.security.enabled=true
       - bootstrap.memory_lock=true
+      - ES_USERNAME=elastic
+      - ES_PASSWORD=changeme
     ports:
       - "9200:9200"
     volumes:
