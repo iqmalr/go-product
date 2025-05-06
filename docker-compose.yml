@@ -7,7 +7,7 @@ services:
     environment:
       POSTGRES_USER: devuser
       POSTGRES_PASSWORD: devpass
-      POSTGRES_DB: mydb
+      POSTGRES_DB: go_products
     ports:
       - "5433:5432"
     volumes:
@@ -28,15 +28,6 @@ services:
       - "9092:9092"
       - "29092:29092"
     environment:
-      # - KAFKA_CFG_NODE_ID=1
-      # - KAFKA_CFG_PROCESS_ROLES=broker,controller
-      # - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=1@kafka:9093
-      # - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093,PLAINTEXT_HOST://:29092
-      # - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
-      # - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
-      # - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
-      # - ALLOW_PLAINTEXT_LISTENER=yes
-      # - KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=true
       - KAFKA_CFG_NODE_ID=1
       - KAFKA_CFG_PROCESS_ROLES=broker,controller
       - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=1@kafka:9093
@@ -56,11 +47,12 @@ services:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.12.0
     container_name: elasticsearch
     environment:
-      - discovery.type=single-node
+      # - discovery.type=single-node
       - ES_JAVA_OPTS=-Xms1g -Xmx1g
-      - ELASTIC_PASSWORD=changeme
       - xpack.security.enabled=true
       - bootstrap.memory_lock=true
+      - ES_USERNAME=elastic
+      - ES_PASSWORD=changeme
     ports:
       - "9200:9200"
     volumes:
