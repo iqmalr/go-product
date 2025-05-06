@@ -20,7 +20,7 @@ info:
 paths:
   /products:
     get:
-      description: Get list of all products
+      description: Get list of all products from Elasticsearch
       produces:
       - application/json
       responses:
@@ -36,7 +36,7 @@ paths:
     post:
       consumes:
       - application/json
-      description: Create a new product entry
+      description: Create a new product entry in PostgreSQL and send event to Kafka
       parameters:
       - description: Product data
         in: body
@@ -60,7 +60,7 @@ paths:
       - products
   /products/{id}:
     delete:
-      description: Delete product by ID
+      description: Delete product by ID from PostgreSQL and send event to Kafka
       parameters:
       - description: Product ID
         in: path
@@ -82,7 +82,7 @@ paths:
       tags:
       - products
     get:
-      description: Get product details by product ID
+      description: Get product details by product ID from Elasticsearch
       parameters:
       - description: Product ID
         in: path
@@ -106,7 +106,7 @@ paths:
     put:
       consumes:
       - application/json
-      description: Update existing product by ID
+      description: Update existing product by ID in PostgreSQL and send event to Kafka
       parameters:
       - description: Product ID
         in: path

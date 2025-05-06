@@ -17,7 +17,7 @@ const docTemplate = `{
     "paths": {
         "/products": {
             "get": {
-                "description": "Get list of all products",
+                "description": "Get list of all products from Elasticsearch",
                 "produces": [
                     "application/json"
                 ],
@@ -38,7 +38,7 @@ const docTemplate = `{
                 }
             },
             "post": {
-                "description": "Create a new product entry",
+                "description": "Create a new product entry in PostgreSQL and send event to Kafka",
                 "consumes": [
                     "application/json"
                 ],
@@ -78,7 +78,7 @@ const docTemplate = `{
         },
         "/products/{id}": {
             "get": {
-                "description": "Get product details by product ID",
+                "description": "Get product details by product ID from Elasticsearch",
                 "produces": [
                     "application/json"
                 ],
@@ -111,7 +111,7 @@ const docTemplate = `{
                 }
             },
             "put": {
-                "description": "Update existing product by ID",
+                "description": "Update existing product by ID in PostgreSQL and send event to Kafka",
                 "consumes": [
                     "application/json"
                 ],
@@ -162,7 +162,7 @@ const docTemplate = `{
                 }
             },
             "delete": {
-                "description": "Delete product by ID",
+                "description": "Delete product by ID from PostgreSQL and send event to Kafka",
                 "produces": [
                     "application/json"
                 ],
